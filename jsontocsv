@@ -1,0 +1,14 @@
+import json
+import pandas as pd
+
+
+with open("C:/Users/3g0/Documents/ITRANSITION/task1_d_cleaned.json", "r", encoding="utf-8") as f:
+    data = json.load(f)
+
+
+df = pd.DataFrame(data)
+
+
+df.to_csv("C:/Users/3g0/Documents/ITRANSITION/task1_d_cleaned.csv", index=False)
+
+print("Done")
