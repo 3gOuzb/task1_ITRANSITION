@@ -1,0 +1,60 @@
+create table itransition.books (
+    id varchar(50) primary key,
+    title varchar(255),
+    author varchar(255),
+    genre varchar(100),
+    publisher varchar(255),
+    year INTEGER,
+    price varchar(50)
+);
+
+
+
+select * from books;
+
+select count(*) from books;
+
+
+
+
+alter table books
+add column price_usd decimal(10,2);
+
+update books
+set price_usd =
+case
+ when price::text like '$%' then
+   replace(price::text, '$', '')::decimal
+ when price::text like '€%' then
+   (replace(price::text, '€', '')::decimal * 1.2)
+end;
+
+
+
+create table summary as
+select
+    year,
+    count(*) as book_count,
+    round(avg(price_usd), 2) as avg_book_price
+from books
+group by year;
+
+
+
+
+
+-------
+
+select * from summary
+order by year;
+
+
+
+
+
+
+
+
+
+
+
